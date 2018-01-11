@@ -4,8 +4,8 @@ services:
     image:
       leeyanzhe/proxypool
     deploy:
-      mode: global
-#      replicas: 3
+      mode: replicated
+      replicas: 10
       restart_policy:
         condition: any
         delay: 10s
