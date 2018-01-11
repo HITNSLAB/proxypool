@@ -1,9 +1,7 @@
 version: '3.4'
 services:
   proxypool:
-    build:
-      context: .
-      dockerfile: api.dockerfile
+    build: .
     restart: always
     environment:
       REDIS_HOST: "172.29.152.141"
