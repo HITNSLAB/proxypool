@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+  proxypool:
+    image:
+      leeyanzhe/proxypool
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: any
+        delay: 10s
+        max_attempts: 5
+        window: 60s
+      update_config:
+        parallelism: 20
+        failure_action: rollback
+        delay: 10s
+        order: stop-first
+    environment:
+      REDIS_HOST: "172.29.152.141"
+      REDIS_PORT: "6379"
+      QUERY_API: "http://svip.kuaidaili.com/api/getproxy/?orderid=941375378355487&num=1000&b_pcchrome=1&b_pcie=1&b_pcff=1&protocol=2&method=2&an_ha=1&sp1=1&sort=2&sep=2"
+      REDIS_KEY: "ip_list"
+      MAX_SIZE: "5000"
+      EXPIRE_TIME: "0"
+      TIME_DIV: "6"
+      MAX_RETRY: "100"
+    command:
+      ["python","api.py"]
