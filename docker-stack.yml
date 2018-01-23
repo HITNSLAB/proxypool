@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 services:
   proxypool:
     image:
@@ -25,5 +25,10 @@ services:
       EXPIRE_TIME: "0"
       TIME_DIV: "6"
       MAX_RETRY: "100"
+    networks:
+      - mainnet
     command:
       ["python","api.py"]
+networks:
+  mainnet:
+    external: true
